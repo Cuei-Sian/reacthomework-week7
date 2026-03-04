@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { emailValidation } from '../utils/validation';
+import { useNavigate } from 'react-router';
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -13,6 +14,9 @@ function Login({ setIsAuth }) {
   //   username: '',
   //   password: '',
   // });
+
+  // 使用navigate做路由的切換
+  const navigate = useNavigate();
 
   //React hook Form
   const {
@@ -52,6 +56,8 @@ function Login({ setIsAuth }) {
       // 登入成功後，請將 Token 設定到 axios 的預設 Header，之後所有 API 請求都會自動帶上 Token
       // eslint-disable-next-line react-hooks/immutability
       axios.defaults.headers.common['Authorization'] = token;
+      //登入成功後使用navigate切換頁面到AdminProducts
+      navigate('/admin/product');
 
       // getProducts();
       //登入成功後，進入產品列表頁，呼叫函式，取得產品列表的資料

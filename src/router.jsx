@@ -7,10 +7,14 @@ import Cart from './views/front/Cart';
 import NotFound from './views/front/NotFound';
 import Checkout from './views/front/Checkout';
 import Login from './views/Login';
+import AdminLayout from './layout/AdminLayout';
+import AdminOrders from './views/admin/AdminOrders';
+import AdminProducts from './views/admin/AdminProducts';
 
 export const router = createHashRouter([
   {
-    paht: '/',
+    // 前台頁面
+    path: '/',
     element: <FrontendLayout />,
     children: [
       {
@@ -36,6 +40,21 @@ export const router = createHashRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+    ],
+  },
+  {
+    // 後台頁面
+    path: 'admin',
+    element: <AdminLayout />,
+    children: [
+      {
+        path: 'product',
+        element: <AdminProducts />,
+      },
+      {
+        path: 'order',
+        element: <AdminOrders />,
       },
     ],
   },
