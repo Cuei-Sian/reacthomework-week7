@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <MessageToast />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </>
   );
 }
