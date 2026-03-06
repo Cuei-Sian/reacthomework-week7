@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
 
 function ProductModal({ modalType, templateProduct, getProducts, closeModal }) {
   const [tempData, setTempData] = useState(templateProduct);
+  const dispatch = useDispatch(); //觸發作業
 
   useEffect(() => {
     setTempData(templateProduct);

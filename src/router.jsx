@@ -10,6 +10,7 @@ import Login from './views/Login';
 import AdminLayout from './layout/AdminLayout';
 import AdminOrders from './views/admin/AdminOrders';
 import AdminProducts from './views/admin/AdminProducts';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export const router = createHashRouter([
   {
@@ -46,7 +47,12 @@ export const router = createHashRouter([
   {
     // 後台頁面
     path: 'admin',
-    element: <AdminLayout />,
+    element: (
+      //想保護後台登入功能，就用路由守衛<ProtectedRoute>把後台登入頁包起來
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: 'product',

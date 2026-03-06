@@ -3,6 +3,9 @@ import axios from 'axios';
 import * as bootstrap from 'bootstrap';
 import Pagination from '../../components/Pagination';
 import ProductModal from '../../components/ProductModal';
+import { createAsyncMessage } from '../../slice/messageSlice';
+import { useDispatch } from 'react-redux';
+import useMessage from '../../hooks/useMessage';
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -39,6 +42,8 @@ function AdminProducts() {
   const [modalType, setModalType] = useState(''); // "create", "edit", "delete"
   // 分頁功能
   const [pagination, setPagination] = useState({});
+  const dispatch = useDispatch();
+  const { showError, showSuccess } = useMessage();
 
   // 串接API
   // 設定取得產品資料列表 API (get)
@@ -50,11 +55,11 @@ function AdminProducts() {
       setProducts(response.data.products);
       setPagination(response.data.pagination); //分頁功能
       console.log('產品列表載入成功：', response.data.products);
+      showSuccess('取得成功');
     } catch (error) {
-      console.log('取得產品列表失敗：', error.response?.data?.message);
-      alert(
-        '取得產品列表失敗：' + (error.response?.data?.message || error.message),
-      );
+      console.log(error.response);
+      // dispatch(createAsyncMessage(error.response.data));
+      showError(error.response.data.message);
     }
   };
 

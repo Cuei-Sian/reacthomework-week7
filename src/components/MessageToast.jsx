@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-
 //共用元件，吐司的彈跳視窗，因為每個視窗都會用到，所以建立在App中作連結設定
 function MessageToast() {
   const messages = useSelector((state) => state.message); //是陣列
